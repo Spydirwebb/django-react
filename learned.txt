@@ -1,0 +1,40 @@
+hello world
+https://www.youtube.com/watch?v=JD-age0BPVo
+1) cl: install django and djangoframework
+2) cl: django-admin startproject <project name> in this case, 
+3) cl: cd into music_controller folder
+4) cl: django-admin startapp api
+#apps are the apps that the project can use, in this case, and api
+5) add app ApiConfig to project settings.py
+    'api.apps.ApiConfig',  <- "api" name is same name from step 4
+    'rest_framework'
+# views are what functions get used
+6)open api/views.py, add function that returns something on httrequest (make sure to import HttpResponse from django.http)
+    #def main(request):
+        #return HttpResponse("<h1>Hello</h1>")
+#url endpoints get handled by...urls.py
+7) cl: touch api/urls.py
+8) make music_controller/urls.py point to api/urls.py
+    #urlpatterns = [
+        path('', include('api.urls'))   <--- if blank path, look up in api.urls
+    ]
+9) make api/urs.py execute a function at this endpoints
+    urlpatterns = [
+        path('home', main)    <---- if path ends in 'home', launch main form step 6
+    ]
+10) 'compile' - 
+    cl: python \manage.py makemigration
+    cl: python \manage.py migrate
+
+11) run server
+    cl: python \manage.py runserver
+    #server automatically updates as you update filesizeformat
+
+How it works!:
+1)url get parsed in music_controller.urls.py (the main urls.py), and told what to do
+    -in this case, if the path is blank, loop up everything after "" in api.urls
+    -ex: path('home/', ('api.urls')) - if path had "home/" after base url (https://127.0.0.1:8000/home/) - look up everything after 'home/' in api.urls
+2)second part of url gets looked up in api.urls (the app urls.py), and told what to do there
+    -in this case, ../home/hi, looks up "hi" in api.urls, which executes the function main from 'api.views' 
+3)main is executed, which returns "Hello, World" on the http request
+
