@@ -1,0 +1,40 @@
+#models
+Models are used for database and how to group things into the database
+1)create model
+    class Room (models.Model):
+2)think about what really needs to go into the model: unique room code, host, guests, values for room(if guests can pause, # to skip)
+    code = models.CharField(max_length=8, default ="", unique=True)
+    host = models.CharField(max_length=50, unique)
+    guest_can_pause = models.BooleanField(null=False, default = False)
+    votes_to_slip = models.IntegerField(null=False, default = 1)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+##rules of django -fat models, thin views##
+ - put most of logic in models, not in view
+
+ 3)make a function to make unique code for room (import string and random)
+    def generate_unique_code():
+        length = 6
+
+        while True:     <-- loop until code is unique
+            code = ''.join(random.choices(string.ascii_uppercase, k=length))
+            if Room.objects.filter(code=code).count() == 0:   <--if code does not currently exist in Room objects
+                break
+        
+        return code
+
+4)make migrations and migrate
+5)make serializers class
+#serializers - take model and translate into json response
+class RoomSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Room
+        fields('id', 'code', 'host', 'guest_can_pause', 'votes_to_skip', 'created_at')
+                #each model has a primary key or id built into it
+6)change views to make a view to see all active view
+    class RoomView(generics.CreateAPIView):
+        queryset = Room.objects.all()    <---queryset = what do we want to return
+        serializer_class = RoomSerializer     <---how to convert into something we can see?
+7)runserver
+
+
