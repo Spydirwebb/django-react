@@ -1,0 +1,32 @@
+## attaching react frontend
+1)make frontend folder and cd
+    django-admin startapp frontend
+2)make new folder structure in frontend: static, templates, src
+    src # react components
+        /components
+    static #things to be cached
+        /css
+        /frontend
+        /images
+    templates
+3)npm init -y
+4)install packages
+    webpack, webpack cli                                                 <--packages everything together
+    @babel/core, babel-loader, @babel/preset-env, @babel/preset-react    <--allows for display in older browsers
+    react, react-dom   <--obvi
+    @material-ui/core   <---/css
+    @babel/plugin-proposal-class-properties   <---async/await
+    react-router-dom   <---rerouting
+    @material-ui/icons
+5)make config files
+    /frontend/babel.config.json   <--babel 
+    /frontend/webpack.config.js
+6)make /frontend/src/index.js
+7)make /frontend/templates/index.html
+8)mkdir /frontend/templates/frontend
+9)flesh out /frontend/templates/index.html
+10)render view 
+    frontend/views.py
+11)add urls
+    music_controller/urls.py
+        path('', include('frontend.urls'))  <--- if its not admin/ or api/, send it to frontend

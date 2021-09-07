@@ -23,7 +23,7 @@ https://www.youtube.com/watch?v=JD-age0BPVo
         path('home', main)    <---- if path ends in 'home', launch main form step 6
     ]
 10) 'compile' - 
-    cl: python \manage.py makemigration
+    cl: python \manage.py makemigrations
     cl: python \manage.py migrate
 
 11) run server
