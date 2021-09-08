@@ -1,0 +1,13 @@
+#react router and building components
+1)create css files
+    fontend/static/css/index.css
+2)make components
+    components/CreateRoomPage.js
+    components/HomePage.js
+    components/RoomJoinPage.js
+3)HomePage.js
+    Router w/ routes to /create (CreateRoomPage) and /join (RoomJoinPage)
+4)add routes to frontend/urls.py or else router wont work  **there is a way around this. look into ***
+
+###becase webpack is caching page, if page doesnt load, need to hard refresh (Ctrl+F5) ##
+

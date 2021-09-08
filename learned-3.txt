@@ -21,6 +21,10 @@
 5)make config files
     /frontend/babel.config.json   <--babel 
     /frontend/webpack.config.js
+6)make scripts in package.json
+    "dev": "webpack --mode development --watch",   <--start webpack in development mode and watch for changes
+    "build": "webpack --mode production"
+
 6)make /frontend/src/index.js
 7)make /frontend/templates/index.html
 8)mkdir /frontend/templates/frontend
@@ -30,3 +34,6 @@
 11)add urls
     music_controller/urls.py
         path('', include('frontend.urls'))  <--- if its not admin/ or api/, send it to frontend
+12)register frontend in settings.py
+    'frontend.apps.FrontendConfig',
+13)run server            

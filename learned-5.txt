@@ -1,0 +1,20 @@
+#handling post requests
+#creating a room from a post request
+1)api/serializers
+    create a serializer that handles the post request
+    post request will have the payload (eg. votes to skip, guests can pause)
+    ##Room serializer serializes room data, CreateRoomSerializer serializes the data to create a room
+    ##good idea to have a serializer for all requests, like get or post serializers
+    ##serialize = does it match the model?
+    class CreateRoomSerializers(serializers.ModelSerializer):
+        class Meta:
+            model = Room
+            fields = ('guest_can_pause', 'votes_to_skip')
+2)api/views
+    new imports
+        CreateRoomSerializer
+        from rest_framework.views import APIView    <--generic API view
+        from rest_framework.response import Response   <--can send custom response from our view
+        from rest_framework impor generics, status  <--status is new, gives us HTTP statuses
+
+    new api/views   
