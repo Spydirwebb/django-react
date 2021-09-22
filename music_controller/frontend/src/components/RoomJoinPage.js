@@ -1,9 +1,11 @@
 import React from 'react'
 
+
 const RoomJoinPage = () => {
+    
     return (
         <div>
-            <p>This is the Join Room Page</p>
+            <p>This is the join room page</p>
         </div>
     )
 }
