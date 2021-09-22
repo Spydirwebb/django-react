@@ -1,1 +1,4 @@
 always, always, always => npm run dev to see updates
+
+You can make a button into a link without an A
+    <Button to="/" component={Link}>Back</Button>      #Link from react-router-dom, Button from material-ui
