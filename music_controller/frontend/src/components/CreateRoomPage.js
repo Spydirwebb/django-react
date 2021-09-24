@@ -24,16 +24,21 @@ const CreateRoomPage = () => {
     const handleGuestCanPauseChange = (e) => {
         setGuestCanPause(e.target.value === 'true' ? true : false)
     }
-    const handleRoomButtonPressed = () => {
+ 
+
+    const handleCreateButtonPressed = () => {
         const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                votesToSkip: votesToSkip,
-                guestCanPause: guestCanPause
-            })
-        }
-    }
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            votes_to_skip: votesToSkip,
+            guest_can_pause: guestCanPause,
+          }),
+        };
+        fetch("/api/create-room", requestOptions)
+          .then((response) => response.json())
+          .then((data) => console.log(data));
+      }
 
     return (
         <div>
@@ -79,7 +84,7 @@ const CreateRoomPage = () => {
                     </FormControl>
                 </Grid>
                 <Grid item xs={12} align="center">
-                    <Button color='primary' variant='contained' onClick={handleRoomButtonPressed}>Create A Room</Button>
+                    <Button color='primary' variant='contained' onClick={handleCreateButtonPressed}>Create A Room</Button>
                 </Grid>
                 <Grid item xs={12} align="center">
                     <Button color='secondary' variant='contained' to='/' component={Link}>Back</Button>
