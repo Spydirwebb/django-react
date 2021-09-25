@@ -10,7 +10,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel"
 import { Link } from "react-router-dom"
 import { FormControl, FormLabel } from '@material-ui/core'
 
-const CreateRoomPage = () => {
+const CreateRoomPage = (props) => {
     const defaultVotes = 2
 
     const [guestCanPause, setGuestCanPause] = useState(true)
@@ -37,7 +37,7 @@ const CreateRoomPage = () => {
         };
         fetch("/api/create-room", requestOptions)
           .then((response) => response.json())
-          .then((data) => console.log(data));
+          .then((data) => props.history.push('/room/'+data.code));
       }
 
     return (

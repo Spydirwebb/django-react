@@ -1,0 +1,1 @@
+how to access information in frontend from backend
