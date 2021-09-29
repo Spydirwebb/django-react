@@ -1,9 +1,11 @@
 from django.db import models
 import string
 import random
+import time
 
 def generate_unique_code():
     length= 6
+    random.seed(time.process_time())
     while True:
         code = ''.join(random.choices(string.ascii_uppercase, k=length))
         if(Room.objects.filter(code=code).count()==0):
