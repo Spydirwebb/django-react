@@ -19,6 +19,10 @@ const HomePage = () => {
 
     }, [])
     
+    const clearRoomCode = () => {
+        setRoomCode(null)
+    }
+
     return (
         <div>
             <Router>
@@ -28,7 +32,11 @@ const HomePage = () => {
                     }} /> 
                     <Route path='/join' component={RoomJoinPage} />
                     <Route path='/create' component={CreateRoomPage} />
-                    <Route path="/room/:roomCode" component={Room} />
+                    <Route path="/room/:roomCode" 
+                        render={(props) => {
+                            return <Room {...props} leaveRoomCallBack={clearRoomCode} />
+                        }} 
+                    />
                 </Switch>
             </Router>
         </div>
