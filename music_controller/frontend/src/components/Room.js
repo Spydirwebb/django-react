@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { Grid, Button, Typography } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import CreateRoomPage from './CreateRoomPage'
+
 
 const Room = (props) => {
     const [votesToSkip, setVotesToSkip] = useState(2)
     const [guestCanPause, setGuestCanPause] = useState(false)
     const [isHost, setIsHost] = useState(false)
+    const [showSetting, setShowSettings] = useState(false)
 
     const roomCode = props.match.params.roomCode
 
@@ -41,6 +43,40 @@ const Room = (props) => {
         getRoomDetails();    
     }, [])
 
+    const renderSettings = () => {
+        return(
+            <Grid container spacing={1}>
+                <Grid item xs={12} align='center'>
+                    <CreateRoomPage 
+                        update={true} 
+                        votesToSkip={votesToSkip} 
+                        guestCanPause={guestCanPause} 
+                        roomCode={roomCode}
+                        updateCallBack={null}
+                    />
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    <Button variant='contained' color='secondary' 
+                        onClick={() => setShowSettings(false)}>
+                        Close
+                    </Button>
+                </Grid>
+            </Grid>
+        )
+    }
+    
+    const renderSettingsButton = () => {
+        return(
+            <Grid item xs={12} align="center">
+                <Button variant='contained' color='primary' onClick={() => setShowSettings(true)}>
+                    Settings
+                </Button>
+            </Grid>
+        )    
+    }
+    if(showSetting){
+        return renderSettings();
+    }
     return (
         <div>
             <Grid container spacing={1}>
@@ -64,6 +100,7 @@ const Room = (props) => {
                         Host: {isHost.toString()}
                     </Typography>
                 </Grid>
+                { isHost ? renderSettingsButton() : null }
                 <Grid item xs={12} align="center">
                     <Button variant="contained" color="secondary" onClick={leaveButtonPressed}>Leave Room</Button>
                 </Grid>
@@ -73,5 +110,7 @@ const Room = (props) => {
         
     )
 }
+
+
 
 export default Room
